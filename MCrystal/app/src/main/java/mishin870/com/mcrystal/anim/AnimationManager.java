@@ -26,6 +26,22 @@ public class AnimationManager implements Runnable {
     }
 
     /**
+     * получить исходный список анимаций
+     * @return
+     */
+    public ArrayList<IAnimation> getAnimations() {
+        return this.animations;
+    }
+
+    /**
+     * получить список анимаций на внесение
+     * @return
+     */
+    public ArrayList<IAnimation> getToAdds() {
+        return this.toAdd();
+    }
+
+    /**
      * проверка на пустоту всех анимаций
      * @return
      */

@@ -30,7 +30,7 @@ public class HideAnimation extends SingleAnimation {
         if (this.currentAlpha > 0) {
             return true;
         } else {
-            this.cell.setType(rnd.nextInt(Cell.NUM_OF_COLORS));
+            this.cell.setType(Cell.NONE);
             this.cell.paint.setAlpha(255);
             return false;
         }

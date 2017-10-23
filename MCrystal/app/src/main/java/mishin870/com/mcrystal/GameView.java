@@ -52,6 +52,22 @@ public class GameView extends View {
     }
 
     /**
+     * геттер для игрового поля
+     * @return
+     */
+    public Field getGameField() {
+        return this.gameField;
+    }
+
+    /**
+     * геттер для менеджера анимаций
+     * @return
+     */
+    public AnimationManager getAnimationManager() {
+        return this.animationManager;
+    }
+
+    /**
      * главный хандлер клика
      * @param action тип клика
      * @param cx

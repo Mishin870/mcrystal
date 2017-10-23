@@ -11,7 +11,7 @@ import mishin870.com.mcrystal.R;
  * все ресурсы проекта в виде bitmap
  */
 public class MCResources {
-    public static Bitmap red, green, blue, yellow;
+    public static Bitmap red, green, blue, yellow, none;
     public static int TILE_WIDTH, TILE_HEIGHT;
 
     /**
@@ -22,6 +22,7 @@ public class MCResources {
         green = BitmapFactory.decodeResource(res, R.drawable.green);
         blue = BitmapFactory.decodeResource(res, R.drawable.blue);
         yellow = BitmapFactory.decodeResource(res, R.drawable.yellow);
+        none = BitmapFactory.decodeResource(res, R.drawable.none);
         TILE_WIDTH = red.getWidth();
         TILE_HEIGHT = blue.getHeight();
     }

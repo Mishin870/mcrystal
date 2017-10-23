@@ -52,7 +52,7 @@ public class Cell {
                 break;
 
             default:
-                bmp = MCResources.red;
+                bmp = MCResources.none;
                 break;
         }
     }

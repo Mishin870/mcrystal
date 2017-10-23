@@ -121,11 +121,25 @@ public class Field {
         }
     }
 
+    /**
+     * очистить пережитки функции сбора соседних ячеек (collect)
+     */
     public void clearCollected() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 field[x][y].collected = false;
             }
         }
+    }
+
+    /**
+     * установить состояние какой-то ячейке
+     * @param x
+     * @param y
+     * @param type
+     */
+    public void setCell(int x, int y, int type) {
+        Cell cell = getCell(x, y);
+        if (cell != null) cell.setType(type);
     }
 }
