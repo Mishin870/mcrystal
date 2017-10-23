@@ -3,9 +3,11 @@ package mishin870.com.mcrystal;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.View;
 
+import mishin870.com.mcrystal.field.Cursor;
 import mishin870.com.mcrystal.field.Field;
 import mishin870.com.mcrystal.field.MCResources;
 
@@ -13,13 +15,17 @@ import mishin870.com.mcrystal.field.MCResources;
  * Created by Mishin870 on 23.10.2017.
  */
 public class GameView extends View {
+    private Paint blackPaint = new Paint();
     private Field gameField;
+    private Cursor cursor;
 
     public GameView(Context context) {
         super(context);
 
         MCResources.init(this.getResources());
         gameField = new Field(5, 5);
+        gameField.randomize();
+        cursor = new Cursor();
 
         this.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -32,15 +38,21 @@ public class GameView extends View {
     /**
      * главный хандлер клика
      * @param action тип клика
-     * @param x
-     * @param y
+     * @param cx
+     * @param cy
      * @return true
      */
-    private boolean onClick(int action, float x, float y) {
-        if (action == MotionEvent.ACTION_DOWN) {
-            gameField.randomize();
+    private boolean onClick(int action, float cx, float cy) {
+        if (action == MotionEvent.ACTION_UP) {
+            int x = (int) ((cx - Field.X_OFFSET) / (MCResources.TILE_WIDTH + Field.X_SPACING));
+            int y = (int) ((cy - Field.Y_OFFSET) / (MCResources.TILE_HEIGHT + Field.Y_SPACING));
+            int oldX = cursor.x;
+            int oldY = cursor.y;
+            if (cursor.toggle(x, y)) {
+                gameField.swap(x, y, oldX, oldY);
+            }
+            this.invalidate();
         }
-        this.invalidate();
         return true;
     }
 
