@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 
 import mishin870.com.mcrystal.GameView;
-import mishin870.com.mcrystal.anim.IAnimation;
 
 /**
  * Created by Mishin870 on 23.10.2017.
  */
 
 public class AnimationManager implements Runnable {
+    private ArrayList<IAnimation> toAdd;
+    private boolean addFlag = false;
+
     private ArrayList<IAnimation> animations;
     private GameView gameView;
 
@@ -20,23 +22,30 @@ public class AnimationManager implements Runnable {
     public AnimationManager(GameView gameView) {
         this.gameView = gameView;
         animations = new ArrayList<IAnimation>();
+        toAdd = new ArrayList<IAnimation>();
     }
 
     public void addAnimation(IAnimation animation) {
-        animations.add(animation);
+        toAdd.add(animation);
+        addFlag = true;
     }
 
     @Override
     public void run() {
         boolean needRepaint = false;
         while (true) {
-            ListIterator<IAnimation> iter = animations.listIterator();
             needRepaint = false;
+            ListIterator<IAnimation> iter = animations.listIterator();
             while (iter.hasNext()) {
                 needRepaint = true;
                 if (!iter.next().play(gameView)) {
                     iter.remove();
                 }
+            }
+            if (addFlag) {
+                animations.addAll(toAdd);
+                toAdd.clear();
+                addFlag = false;
             }
             try {
                 Thread.sleep(50);
@@ -44,7 +53,7 @@ public class AnimationManager implements Runnable {
                 System.err.println("InterruptedException in AnimationManager::run()");
                 return;
             }
-            if (needRepaint) gameView.invalidate();
+            if (needRepaint) gameView.postInvalidate();
         }
     }
 
