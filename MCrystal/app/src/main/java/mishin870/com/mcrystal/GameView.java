@@ -15,12 +15,15 @@ import mishin870.com.mcrystal.field.MCResources;
  * Created by Mishin870 on 23.10.2017.
  */
 public class GameView extends View {
-    private Paint blackPaint = new Paint();
+    private Paint blackPaint;
     private Field gameField;
     private Cursor cursor;
 
     public GameView(Context context) {
         super(context);
+
+        blackPaint = new Paint();
+        blackPaint.setStyle(Paint.Style.STROKE);
 
         MCResources.init(this.getResources());
         gameField = new Field(5, 5);
@@ -46,11 +49,11 @@ public class GameView extends View {
         if (action == MotionEvent.ACTION_UP) {
             int x = (int) ((cx - Field.X_OFFSET) / (MCResources.TILE_WIDTH + Field.X_SPACING));
             int y = (int) ((cy - Field.Y_OFFSET) / (MCResources.TILE_HEIGHT + Field.Y_SPACING));
-            int oldX = cursor.x;
+            /*int oldX = cursor.x;
             int oldY = cursor.y;
             if (cursor.toggle(x, y)) {
                 gameField.swap(x, y, oldX, oldY);
-            }
+            }*/
             this.invalidate();
         }
         return true;
@@ -64,6 +67,11 @@ public class GameView extends View {
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.WHITE);
         gameField.draw(canvas);
+        if (cursor.captured) {
+            int x = cursor.x * (MCResources.TILE_WIDTH + Field.X_SPACING) + Field.X_OFFSET;
+            int y = cursor.y * (MCResources.TILE_HEIGHT + Field.Y_SPACING) + Field.Y_OFFSET;
+            canvas.drawRect(x, y, x + MCResources.TILE_WIDTH, y + MCResources.TILE_HEIGHT, blackPaint);
+        }
     }
 
 }

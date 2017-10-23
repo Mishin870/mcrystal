@@ -8,7 +8,7 @@ import android.graphics.Paint;
  * Created by Mishin870 on 23.10.2017.
  */
 public class Cell {
-    private static final Paint cellPaint = new Paint();
+    public static final int NONE = -1;
     public static final int RED = 0;
     public static final int GREEN = 1;
     public static final int BLUE = 2;
@@ -16,6 +16,8 @@ public class Cell {
     public static final int NUM_OF_COLORS = 4;
     private int type;
     private Bitmap bmp;
+    public Paint paint = new Paint();
+    public int offX = 0, offY = 0;
 
     /**
      * ячейка поля
@@ -61,9 +63,9 @@ public class Cell {
      * @param y
      */
     public void draw(Canvas canvas, int x, int y) {
-        canvas.drawBitmap(bmp, x, y, cellPaint);
+        canvas.drawBitmap(bmp, x, y, paint);
     }
-    
+
     public int getType() {
         return this.type;
     }

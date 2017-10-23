@@ -56,7 +56,7 @@ public class Field {
      * @return
      */
     public Cell getCell(int x, int y) {
-        return x >= 0 && y >= 0 && x < width && y < height ? field[x][y] : null;
+        return (x >= 0 && y >= 0 && x < width && y < height) ? field[x][y] : null;
     }
 
     /**
@@ -71,8 +71,8 @@ public class Field {
         Cell c2 = getCell(x2, y2);
         int type1 = c1.getType();
         int type2 = c2.getType();
-        c1.setType(type1);
-        c2.setType(type2);
+        c1.setType(type2);
+        c2.setType(type1);
     }
 
     /**
@@ -80,11 +80,13 @@ public class Field {
      * @param canvas
      */
     public void draw(Canvas canvas) {
+        Cell cell;
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                field[x][y].draw(canvas,
-                        X_OFFSET + x * (MCResources.TILE_WIDTH + X_SPACING),
-                        Y_OFFSET + y * (MCResources.TILE_HEIGHT + Y_SPACING)
+                cell = field[x][y];
+                cell.draw(canvas,
+                        X_OFFSET + x * (MCResources.TILE_WIDTH + X_SPACING) + cell.offX,
+                        Y_OFFSET + y * (MCResources.TILE_HEIGHT + Y_SPACING) + cell.offY
                 );
             }
         }
