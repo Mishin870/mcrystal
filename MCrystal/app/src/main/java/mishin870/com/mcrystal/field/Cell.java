@@ -14,8 +14,8 @@ public class Cell {
     public static final int BLUE = 2;
     public static final int YELLOW = 3;
     public static final int NUM_OF_COLORS = 4;
-    public static final int WIDTH = 40;
-    public static final int HEIGHT = 40;
+    public static final int WIDTH = 80;
+    public static final int HEIGHT = 80;
     private int type;
     private Bitmap bmp;
 

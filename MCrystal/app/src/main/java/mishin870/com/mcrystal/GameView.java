@@ -19,7 +19,7 @@ public class GameView extends View {
         super(context);
 
         MCResources.init(this.getResources());
-        gameField = new Field(10, 10);
+        gameField = new Field(5, 5);
 
         this.setOnTouchListener(new View.OnTouchListener() {
             @Override

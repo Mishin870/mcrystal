@@ -7,6 +7,10 @@ import java.util.Random;
  * Created by Mishin870 on 23.10.2017.
  */
 public class Field {
+    private static final int X_SPACING = 10;
+    private static final int Y_SPACING = 10;
+    private static final int X_OFFSET = 10;
+    private static final int Y_OFFSET = 10;
     private Cell[][] field;
     private int width, height;
 
@@ -52,7 +56,10 @@ public class Field {
     public void draw(Canvas canvas) {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                field[x][y].draw(canvas, x * Cell.WIDTH, y * Cell.HEIGHT);
+                field[x][y].draw(canvas,
+                        X_OFFSET + x * (Cell.WIDTH + X_SPACING),
+                        Y_OFFSET + y * (Cell.HEIGHT + Y_SPACING)
+                );
             }
         }
     }
