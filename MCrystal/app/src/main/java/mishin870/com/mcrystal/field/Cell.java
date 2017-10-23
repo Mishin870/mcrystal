@@ -16,16 +16,19 @@ public class Cell {
     public static final int NUM_OF_COLORS = 4;
     private int type;
     private Bitmap bmp;
-    public boolean collected = false;
+    public boolean collected = false, isLockedForFallInto = false;
     public Paint paint = new Paint();
     public int offX = 0, offY = 0;
+    public int x, y;
 
     /**
      * ячейка поля
      * @param type тип ячейки
      */
-    public Cell(int type) {
+    public Cell(int type, int x, int y) {
         this.setType(type);
+        this.x = x;
+        this.y = y;
     }
 
     /**

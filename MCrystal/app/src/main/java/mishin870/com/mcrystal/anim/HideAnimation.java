@@ -12,12 +12,13 @@ public class HideAnimation extends SingleAnimation {
     private static final Random rnd = new Random();
     private static final int ANIM_SPEED = 20;
     private int currentAlpha;
+    private int x, y;
 
     /**
      * анимация затухания ячейки в небытье
      * @param cell
      */
-    public HideAnimation(Cell cell) {
+    public HideAnimation(Cell cell, int x, int y) {
         super(cell);
         this.currentAlpha = 255;
         this.cell.paint.setAlpha(this.currentAlpha);
@@ -32,6 +33,16 @@ public class HideAnimation extends SingleAnimation {
         } else {
             this.cell.setType(Cell.NONE);
             this.cell.paint.setAlpha(255);
+            int x = this.cell.x;
+            int y = this.cell.y;
+            Cell tmp = gameView.getGameField().getCell(x, y - 1);
+            if (tmp != null) {
+                if (tmp.getType() == Cell.NONE) {
+                    
+                }
+            } else {
+                this.cell.setType(rnd.nextInt(Cell.NUM_OF_COLORS));
+            }
             return false;
         }
     }

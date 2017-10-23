@@ -34,7 +34,7 @@ public class Field {
     private void initField() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                field[x][y] = new Cell(Cell.RED);
+                field[x][y] = new Cell(Cell.RED, x, y);
             }
         }
     }

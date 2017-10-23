@@ -38,7 +38,7 @@ public class AnimationManager implements Runnable {
      * @return
      */
     public ArrayList<IAnimation> getToAdds() {
-        return this.toAdd();
+        return this.toAdd;
     }
 
     /**
