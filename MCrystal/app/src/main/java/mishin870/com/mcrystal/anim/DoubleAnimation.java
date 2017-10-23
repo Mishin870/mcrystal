@@ -1,5 +1,6 @@
 package mishin870.com.mcrystal.anim;
 
+import mishin870.com.mcrystal.GameView;
 import mishin870.com.mcrystal.field.Cell;
 
 /**
@@ -19,7 +20,7 @@ public class DoubleAnimation implements IAnimation {
     }
 
     @Override
-    public boolean play() {
+    public boolean play(GameView gameView) {
         return true;
     }
 

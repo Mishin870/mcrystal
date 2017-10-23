@@ -7,6 +7,9 @@ import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.View;
 
+import mishin870.com.mcrystal.anim.AnimationManager;
+import mishin870.com.mcrystal.anim.HideAnimation;
+import mishin870.com.mcrystal.field.Cell;
 import mishin870.com.mcrystal.field.Cursor;
 import mishin870.com.mcrystal.field.Field;
 import mishin870.com.mcrystal.field.MCResources;
@@ -18,6 +21,8 @@ public class GameView extends View {
     private Paint blackPaint;
     private Field gameField;
     private Cursor cursor;
+    private AnimationManager animationManager;
+    private Thread animationManagerThread;
 
     public GameView(Context context) {
         super(context);
@@ -29,6 +34,10 @@ public class GameView extends View {
         gameField = new Field(5, 5);
         gameField.randomize();
         cursor = new Cursor();
+
+        animationManager = new AnimationManager(this);
+        animationManagerThread = new Thread(animationManager);
+        animationManagerThread.start();
 
         this.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -49,6 +58,11 @@ public class GameView extends View {
         if (action == MotionEvent.ACTION_UP) {
             int x = (int) ((cx - Field.X_OFFSET) / (MCResources.TILE_WIDTH + Field.X_SPACING));
             int y = (int) ((cy - Field.Y_OFFSET) / (MCResources.TILE_HEIGHT + Field.Y_SPACING));
+
+            Cell cell = gameField.getCell(x, y);
+            if (cell != null) {
+                animationManager.addAnimation(new HideAnimation(cell));
+            }
             /*int oldX = cursor.x;
             int oldY = cursor.y;
             if (cursor.toggle(x, y)) {
