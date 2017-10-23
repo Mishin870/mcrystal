@@ -16,6 +16,7 @@ public class Cell {
     public static final int NUM_OF_COLORS = 4;
     private int type;
     private Bitmap bmp;
+    public boolean collected = false;
     public Paint paint = new Paint();
     public int offX = 0, offY = 0;
 

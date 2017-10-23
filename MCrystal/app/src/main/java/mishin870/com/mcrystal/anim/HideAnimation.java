@@ -10,7 +10,7 @@ import mishin870.com.mcrystal.field.Cell;
  */
 public class HideAnimation extends SingleAnimation {
     private static final Random rnd = new Random();
-    private static final int ANIM_SPEED = 15;
+    private static final int ANIM_SPEED = 20;
     private int currentAlpha;
 
     /**

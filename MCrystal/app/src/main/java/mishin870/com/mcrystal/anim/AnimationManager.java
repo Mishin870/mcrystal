@@ -25,6 +25,18 @@ public class AnimationManager implements Runnable {
         toAdd = new ArrayList<IAnimation>();
     }
 
+    /**
+     * проверка на пустоту всех анимаций
+     * @return
+     */
+    public boolean isEmpty() {
+        return toAdd.isEmpty() && animations.isEmpty();
+    }
+
+    /**
+     * добавить анимацию в список на выполнение
+     * @param animation
+     */
     public void addAnimation(IAnimation animation) {
         toAdd.add(animation);
         addFlag = true;

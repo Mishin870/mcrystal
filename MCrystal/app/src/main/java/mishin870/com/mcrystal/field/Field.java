@@ -1,6 +1,8 @@
 package mishin870.com.mcrystal.field;
 
 import android.graphics.Canvas;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -92,4 +94,38 @@ public class Field {
         }
     }
 
+    /**
+     * рекурсивная функция поиска лежащих рядом ячеек такого же типа, как и наша
+     * @param cell
+     * @param x
+     * @param y
+     * @return
+     */
+    public ArrayList<Cell> collect(Cell cell, int x, int y) {
+        if (!cell.collected) {
+            int type = cell.getType();
+            ArrayList<Cell> ret = new ArrayList<Cell>();
+            ret.add(cell);
+            cell.collected = true;
+            Cell up = getCell(x, y - 1);
+            Cell down = getCell(x, y + 1);
+            Cell left = getCell(x - 1, y);
+            Cell right = getCell(x + 1, y);
+            if (up != null && up.getType() == type) ret.addAll(collect(up, x, y - 1));
+            if (down != null && down.getType() == type) ret.addAll(collect(down, x, y + 1));
+            if (left != null && left.getType() == type) ret.addAll(collect(left, x - 1, y));
+            if (right != null && right.getType() == type) ret.addAll(collect(right, x + 1, y));
+            return ret;
+        } else {
+            return new ArrayList<Cell>();
+        }
+    }
+
+    public void clearCollected() {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                field[x][y].collected = false;
+            }
+        }
+    }
 }
