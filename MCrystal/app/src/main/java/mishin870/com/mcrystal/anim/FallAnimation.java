@@ -54,6 +54,13 @@ public class FallAnimation extends SingleAnimation {
         return false;
     }
 
+    /**
+     * проверяет верхнюю ячейку на пустоту
+     */
+    private void checkForUpCell() {
+
+    }
+
     @Override
     public boolean play(GameView gameView) {
         this.cell.offY += ANIM_SPEED;
@@ -65,6 +72,7 @@ public class FallAnimation extends SingleAnimation {
             AnimationManager animationManager = gameView.getAnimationManager();
             if (!isLocked(animationManager.getToAdds(), this.sourceX, this.sourceY) && !isLocked(animationManager.getAnimations(), this.sourceX, this.sourceY)) {
                 gameView.getGameField().setCell(this.sourceX, this.sourceY, Cell.NONE);
+                checkForUpCell();
             }
 
             return false;

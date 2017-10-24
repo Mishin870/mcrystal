@@ -18,7 +18,7 @@ public class HideAnimation extends SingleAnimation {
      * анимация затухания ячейки в небытье
      * @param cell
      */
-    public HideAnimation(Cell cell, int x, int y) {
+    public HideAnimation(Cell cell) {
         super(cell);
         this.currentAlpha = 255;
         this.cell.paint.setAlpha(this.currentAlpha);
@@ -37,8 +37,8 @@ public class HideAnimation extends SingleAnimation {
             int y = this.cell.y;
             Cell tmp = gameView.getGameField().getCell(x, y - 1);
             if (tmp != null) {
-                if (tmp.getType() == Cell.NONE) {
-                    
+                if (tmp.getType() != Cell.NONE) {
+                    gameView.getAnimationManager().addAnimation(new FallAnimation(tmp, gameView.getGameField(), x, y - 1));
                 }
             } else {
                 this.cell.setType(rnd.nextInt(Cell.NUM_OF_COLORS));
